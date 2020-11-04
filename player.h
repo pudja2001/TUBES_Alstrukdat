@@ -4,10 +4,6 @@
 #include "boolean.h"
 
 /**************KUMPULAN ADT******************/
-typedef struct {
-	POSITION P; //posisi pemain
-	DETAILS D; //detail pemain (berisi nama dan sumber daya gitu
-} PLAYER;
 
 typedef struct {
 	int x; //absis
@@ -16,11 +12,18 @@ typedef struct {
 
 typedef struct {
 	char Nama[100]; //nama pemain
+	int panjangnama; //hahaha buat nyatet doang sih
 } DETAILS;
+
+typedef struct {
+	POSITION Pos; //posisi pemain
+	DETAILS Det; //detail pemain (berisi nama dan sumber daya gitu
+} PLAYER;
+
 /*******************************************/
 
 /***********SELEKTOR************************/
-#define Nama(P, i) PLAYER.DETAILS.Nama[i]
+
 
 /***********FUNGSI-FUNGSI******************/
 void CreatePlayer(PLAYER *P); //membuat pemain di halaman awal saat new game

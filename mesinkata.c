@@ -5,7 +5,7 @@ void BacaKata(KATA *X){
 	
 	i = 0;
 	(*X).length = 0;
-	while ( (i < 10) && (KATA(*X,i-1) != '\n' )){ //Memasukkan Command ke variabel KATA
+	while ( (i < 10) && (KATA(*X,i-1) != '\n' )){ //Memasukkan Command ke variabel KATA atau nulis apapund deh
 		scanf("%c", &KATA(*X, i) );
 		(*X).length = (*X).length + 1;
 		i = i + 1;
@@ -27,7 +27,7 @@ boolean IsKataSama(KATA X, KATA Y){
 	boolean sama;
 	sama = true;
 	i = 0;
-	while( (i < X.length-1) && (sama==true)){
+	while( (i < 10) && (sama==true)){
 		if (KATA(X, i) != KATA(Y,i) ){
 			sama = false;
 		}

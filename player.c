@@ -1,24 +1,28 @@
 #include "player.h"
+#include "mesinkata.h"
 
 void CreatePlayer(PLAYER *P){
+	KATA Name;
 	int i;
+	
+	//MEMBACA NAMA PEMAIN
+	printf("Gomen onii-chan! Demo, anata no namaewa nan desuka onii-chan: ");
+	BacaKata(&Name);
 	i = 0;
-	while (i < 100){
-		scanf("%c", Nama(*P,i) );
+	while(i < Name.length-1){
+		(*P).Det.Nama[i] = KATA(Name, i);
 		i = i + 1;
 	}
+	(*P).Det.panjangnama = Name.length;
+	
 }
 
 void ShowPlayer(PLAYER P){
 	int i;
 	i = 0;
-	while( (i < 100) && (PLAYER.D.Nama[i] != ' ')){
-		printf("%c", PLAYER.D.Nama[i]);
+	while(i < P.Det.panjangnama-1){
+		printf("%c", P.Det.Nama[i]);
 		i = i + 1;
 	}
+	printf("\n");
 }
-
-/***NOTE****/
-/*
-INI BUAT AKHIR NAMA ATAU COMMAND.. NANTI DIBENERIN PAKE MESIN KATA...
-*/
