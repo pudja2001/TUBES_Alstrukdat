@@ -17,7 +17,7 @@ typedef struct {
 
 typedef struct {
 	POSITION Pos; //posisi pemain
-	DETAILS Det; //detail pemain (berisi nama dan sumber daya gitu
+	DETAILS Det; //detail pemain (berisi nama dan sumber daya gitu)
 } PLAYER;
 
 /*******************************************/

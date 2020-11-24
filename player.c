@@ -6,10 +6,10 @@ void CreatePlayer(PLAYER *P){
 	int i;
 	
 	//MEMBACA NAMA PEMAIN
-	printf("Gomen onii-chan! Demo, anata no namaewa nan desuka onii-chan: ");
+	printf("Gomen onii-chan! Masukin (nama) onii-chan: ");
 	BacaKata(&Name);
 	i = 0;
-	while(i < Name.length-1){
+	while(i < Name.length){
 		(*P).Det.Nama[i] = KATA(Name, i);
 		i = i + 1;
 	}
@@ -20,7 +20,8 @@ void CreatePlayer(PLAYER *P){
 void ShowPlayer(PLAYER P){
 	int i;
 	i = 0;
-	while(i < P.Det.panjangnama-1){
+	printf("Nama onii-chan	: ");
+	while(i < P.Det.panjangnama){
 		printf("%c", P.Det.Nama[i]);
 		i = i + 1;
 	}
