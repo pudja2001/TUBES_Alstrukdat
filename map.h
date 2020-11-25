@@ -6,6 +6,7 @@
 /**************KUMPULAN ADT******************/
 typedef struct {
 	char NAMA[100];
+	int length;
 } DETAIL_WAHANA;
 
 typedef struct {
@@ -16,6 +17,25 @@ typedef struct {
 	DETAIL_WAHANA D; //ini nanti berisi detail wahana
 	LAPORAN_WAHANA L; //berisi laporan penjualan dan lain-lain
 	char karakter; //karakter yang ditampilkan di MAP
+	/*CATATAN KARAKTER
+	* : tembok
+	- : kosong
+	> < ^ v : terowongan
+	
+	O : office
+	G : Gudang (tempat apa ya?)
+	A : antrian pengganggu kesenangan kita berdua onii-chan
+	
+	Wahana
+	B : Bioskop khusus anime xD
+	M : Maid cafe
+	C : foto spot + Cosplay
+	S : wibu Shop
+	L : Love arcade (tempat game)
+	T : Taman mainan biasa (sejenis roler coeaster apalah itu pokoknya)
+	
+	P : player
+	*/ 
 } WAHANA;
 
 typedef struct {

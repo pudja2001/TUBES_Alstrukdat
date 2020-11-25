@@ -102,6 +102,19 @@ int main(){
 	quit.T[4] = '\n';
 	quit.length = 4;
 	
+	//Command untuk interaksi
+	KATA interaksi;
+	interaksi.T[0] = 'i';
+	interaksi.T[1] = 'n';
+	interaksi.T[2] = 't';
+	interaksi.T[3] = 'e';
+	interaksi.T[4] = 'r';
+	interaksi.T[5] = 'a';
+	interaksi.T[6] = 'k';
+	interaksi.T[7] = 's';
+	interaksi.T[8] = 'i';
+	interaksi.length = 9;
+	
 	/********BAGIAN UTAMA GAME NON DEKLARASI************/
 	system("cls");
 	printf("Selamat datang Onii-chan!\n");
@@ -154,9 +167,11 @@ int main(){
 			printf("Yametteee onii-chan, ini mau ngapain??? >_>\n");
 			printf("\n");
 			printf("wasd -> gendong aku onii-chan (Jangan nabrak tembok, buang-buang waktu baka!). Jalan butuh 5 menit onii-chan!\n");
+			printf("interaksi -> untuk berinteraksi dengan lingkungan sekitar, biar ga sama aku terus onii-chan :3\n");
 			printf("\n");
 			printf("Ngapain onii-chan, imuoto bakal ngikut ini: ");
 			BacaKata(&command);
+			printf("\n");
 			
 			if(IsKataSama(command,a)){
 				kiri(&M,&P,&J);
@@ -169,6 +184,9 @@ int main(){
 			}
 			else if(IsKataSama(command,s)){
 				bawah(&M, &P,&J);
+			}
+			else if(IsKataSama(command,interaksi)){
+				interact(M,P,J);
 			}
 		}
 		
