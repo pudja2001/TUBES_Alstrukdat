@@ -18,12 +18,13 @@ void CreatePlayer(PLAYER *P){
 }
 
 void ShowPlayer(PLAYER P){
+	//PRINT NAMA SAMA STAT (UANG DLL)
 	int i;
 	i = 0;
-	printf("Nama onii-chan	: ");
 	while(i < P.Det.panjangnama){
 		printf("%c", P.Det.Nama[i]);
 		i = i + 1;
 	}
+	printf(" onii-chan ^^");
 	printf("\n");
 }

@@ -8,6 +8,7 @@
 #include "map.c"
 #include "mesinkata.c"
 #include "perintah.c"
+#include "jam.c"
 
 int main(){
 	
@@ -15,6 +16,10 @@ int main(){
 	
 	/*************DEKLARASI ONII-CHANNNN**********/
 	PLAYER P;
+	
+	/*************DEKLARASI JAM*******************/
+	JAM J;
+	J.minutes = 0;
 	
 	/*************DEKLARASI MAP PETAAAAAA*********/
 	char temp; //untuk pindah pindah
@@ -105,6 +110,7 @@ int main(){
 	printf("\n");
 	printf("new -> mulai merancang taman bermain imouto\n");
 	printf("quit-> quit dan gapeduli karena sukanya sama onee-san\n");
+	printf("\n");
 	
 	//Apakah mau quit atau maen sama kawaii imouto
 	printf("Onii-chan pengen apa: ");
@@ -119,7 +125,9 @@ int main(){
 		printf("\n");
 		printf("new -> mulai merancang taman bermain imouto\n");
 		printf("quit-> quit dan gapeduli karena sukanya sama onee-san\n");
-		printf("MASUKIN COMMAND YANG BENER ONII-CHAN NO AHO!\n");
+		printf("\n");
+		printf("MASUKIN COMMAND YANG BENER ONII-CHAN BAKAAA!\n");
+		printf("\n");
 		
 		//Apakah mau quit atau maen sama kawaii imouto
 		printf("Onii-chan pengen apa cepet: ");
@@ -135,31 +143,39 @@ int main(){
 		
 		//LOOPING GAME YANG SESUNGGUHNYA
 		while(IsKataSama(command, quit) == false /*AND WAKTU MASIH ADA*/){//SEMENTARA BELUM BUTUH, MASIH MAU NGECE JALAN JALAN
+		
+			//USER INTERFACE
 			system("cls");
 			ShowMap(M);
+			printf("\n");
+			ShowJam(J);
+			printf("\n");
 			ShowPlayer(P);
-			printf("Damme onii-chan, ini mau ngapain??? >_>\n");
-			printf("wasd jalan onii-chan\n");
+			printf("Yametteee onii-chan, ini mau ngapain??? >_>\n");
+			printf("\n");
+			printf("wasd -> gendong aku onii-chan (Jangan nabrak tembok, buang-buang waktu baka!). Jalan butuh 5 menit onii-chan!\n");
+			printf("\n");
 			printf("Ngapain onii-chan, imuoto bakal ngikut ini: ");
 			BacaKata(&command);
+			
 			if(IsKataSama(command,a)){
-				kiri(&M,&P);
+				kiri(&M,&P,&J);
 			}
 			else if(IsKataSama(command,w)){
-				atas(&M, &P);
+				atas(&M, &P,&J);
 			}
 			else if(IsKataSama(command,d)){
-				kanan(&M, &P);
+				kanan(&M, &P,&J);
 			}
 			else if(IsKataSama(command,s)){
-				bawah(&M, &P);
+				bawah(&M, &P,&J);
 			}
 		}
 		
 	}
 	else if(IsKataSama(command, quit)){
 		printf("\n");
-		printf("Onii-chan no BAKAAAA!");
+		printf("Onii-chan BAKAAAA!");
 	}
 	
 	return 0;

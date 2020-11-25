@@ -1,7 +1,8 @@
 #include "map.h"
 #include "player.h"
+#include "jam.h"
 
-void kiri(MAP *M, PLAYER *P){
+void kiri(MAP *M, PLAYER *P, JAM *J){
 	char temp;
 	//gerak dalam satu map
 	if((*M).T[(*P).Pos.x][((*P).Pos.y) - 1].karakter == '-'){ //kalo bukan tembok
@@ -26,9 +27,11 @@ void kiri(MAP *M, PLAYER *P){
 		(*P).Pos.x = 10;
 		(*P).Pos.y = 5;
 	}
+	(*J).minutes = ( (*J).minutes + 5)%1440;
+	(*J).total = (*J).total + 5;
 }
 
-void atas(MAP *M, PLAYER *P){
+void atas(MAP *M, PLAYER *P, JAM *J){
 	char temp;
 	if((*M).T[((*P).Pos.x)-1][(*P).Pos.y].karakter == '-'){ //kalo bukan tembok
 		temp = (*M).T[(*P).Pos.x][(*P).Pos.y].karakter;
@@ -52,9 +55,11 @@ void atas(MAP *M, PLAYER *P){
 		(*P).Pos.x = 5;
 		(*P).Pos.y = 10;
 	}
+	(*J).minutes = ( (*J).minutes + 5)%1440;
+	(*J).total = (*J).total + 5;
 }
 
-void kanan(MAP *M, PLAYER *P){
+void kanan(MAP *M, PLAYER *P, JAM *J){
 	char temp;
 	if((*M).T[(*P).Pos.x][((*P).Pos.y)+1].karakter == '-'){ //kalo bukan tembok
 		temp = (*M).T[(*P).Pos.x][(*P).Pos.y].karakter;
@@ -78,9 +83,11 @@ void kanan(MAP *M, PLAYER *P){
 		(*P).Pos.x = 10;
 		(*P).Pos.y = 8;
 	}
+	(*J).minutes = ( (*J).minutes + 5)%1440;
+	(*J).total = (*J).total + 5;
 }
 
-void bawah(MAP *M, PLAYER *P){
+void bawah(MAP *M, PLAYER *P, JAM *J){
 	char temp;
 	if((*M).T[((*P).Pos.x)+1][(*P).Pos.y].karakter == '-'){ //kalo bukan tembok
 		temp = (*M).T[(*P).Pos.x][(*P).Pos.y].karakter;
@@ -104,4 +111,6 @@ void bawah(MAP *M, PLAYER *P){
 		(*P).Pos.x = 8;
 		(*P).Pos.y = 10;
 	}
+	(*J).minutes = ( (*J).minutes + 5)%1440;
+	(*J).total = (*J).total + 5;
 }
