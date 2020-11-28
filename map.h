@@ -5,8 +5,10 @@
 
 /**************KUMPULAN ADT******************/
 typedef struct {
-	char NAMA[100];
-	int length;
+	int level;
+	int durasi;
+	int harga;
+	int kapasitas;
 } DETAIL_WAHANA;
 
 typedef struct {
@@ -32,7 +34,7 @@ typedef struct {
 	C : foto spot + Cosplay
 	S : wibu Shop
 	L : Love arcade (tempat game)
-	T : Taman mainan biasa (sejenis roler coeaster apalah itu pokoknya)
+	H : Host club
 	
 	P : player
 	*/ 

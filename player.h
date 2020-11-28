@@ -13,6 +13,11 @@ typedef struct {
 typedef struct {
 	char Nama[100]; //nama pemain
 	int panjangnama; //hahaha buat nyatet doang sih
+	//state
+	int uang;
+	int besi;
+	int kayu;
+	int batu;
 } DETAILS;
 
 typedef struct {

@@ -44,11 +44,12 @@ int main(){
 		}
 		i = i + 1;
 	}
-	//POSISI PEMAINNYA DAN TEROWONGAN
+	//POSISI PEMAIN DAN LAINNYA
+	//Pemain
 	M.T[3][3].karakter = 'P';
 	P.Pos.x = 3;
 	P.Pos.y = 3;
-	
+	//Terowongan
 	M.T[3][6].karakter = '>';
 	M.T[6][3].karakter = 'v';
 	M.T[3][7].karakter = '<';
@@ -57,6 +58,11 @@ int main(){
 	M.T[10][7].karakter = '<';
 	M.T[10][6].karakter = '>';
 	M.T[7][3].karakter = '^';
+	//Office dll
+	M.T[4][4].karakter = 'O';
+	M.T[3][1].karakter = 'G';
+	M.T[1][1].karakter = 'A';
+	
 	M.Map = 1;
 	
 	
@@ -113,7 +119,34 @@ int main(){
 	interaksi.T[6] = 'k';
 	interaksi.T[7] = 's';
 	interaksi.T[8] = 'i';
+	interaksi.T[9] = '\n';
 	interaksi.length = 9;
+	
+	//PREPARATION PHASE
+	//Command untuk buy
+	KATA buy;
+	buy.T[0] = 'b';
+	buy.T[1] = 'u';
+	buy.T[2] = 'y';
+	buy.T[3] = '\n';
+	buy.length = 3;
+	//Command untuk main
+	KATA skip;
+	skip.T[0] = 's';
+	skip.T[1] = 'k';
+	skip.T[2] = 'i';
+	skip.T[3] = 'p';
+	skip.T[4] = '\n';
+	skip.length = 4;
+	//Command untuk build
+	KATA build;
+	build.T[0] = 'b';
+	build.T[1] = 'u';
+	build.T[2] = 'i';
+	build.T[3] = 'l';
+	build.T[4] = 'd';
+	build.T[5] = '\n';
+	build.length = 5;
 	
 	/********BAGIAN UTAMA GAME NON DEKLARASI************/
 	system("cls");
@@ -158,37 +191,103 @@ int main(){
 		while(IsKataSama(command, quit) == false /*AND WAKTU MASIH ADA*/){//SEMENTARA BELUM BUTUH, MASIH MAU NGECE JALAN JALAN
 		
 			//USER INTERFACE
-			system("cls");
-			ShowMap(M);
-			printf("\n");
-			ShowJam(J);
-			printf("\n");
-			ShowPlayer(P);
-			printf("Yametteee onii-chan, ini mau ngapain??? >_>\n");
-			printf("\n");
-			printf("wasd -> gendong aku onii-chan (Jangan nabrak tembok, buang-buang waktu baka!). Jalan butuh 5 menit onii-chan!\n");
-			printf("interaksi -> untuk berinteraksi dengan lingkungan sekitar, biar ga sama aku terus onii-chan :3\n");
-			printf("\n");
-			printf("Ngapain onii-chan, imuoto bakal ngikut ini: ");
-			BacaKata(&command);
-			printf("\n");
 			
-			if(IsKataSama(command,a)){
-				kiri(&M,&P,&J);
+			//PREPARATION PHASE
+			
+			if(J.minutes < 480){
+				system("cls");
+				ShowMap(M);
+				printf("\n");
+				ShowJam(J);
+				printf("Preparation Phase\n");
+				printf("\n");
+				ShowPlayer(P);
+				printf("\n");
+				printf("Yametteee onii-chan, ini mau ngapain??? >_>\n");
+				printf("wasd -> gendong aku onii-chan. Jalan malem-malem begini ga ngehabisis waktu koq\n");
+				printf("interaksi -> untuk berinteraksi dengan lingkungan sekitar, biar ga sama aku terus onii-chan :3\n");
+				
+				printf("buy -> membeli kayu, batu, atau besi xD\n");
+				printf("build -> Membangun wahana baru onii-chan xD\n");
+				printf("skip -> langsung aja ke Main Phase onii-chan\n");
+				
+				printf("quit -> sudah karena ada papa-mama!\n");
+				printf("\n");
+				printf("Ngapain onii-chan, imuoto bakal ngikut ini: ");
+				BacaKata(&command);
+				printf("\n");
+				
+				if(IsKataSama(command,a)){
+					kiri(&M,&P,&J);
+					J.minutes = J.minutes - 5;
+					J.total = J.total - 5;
+				}
+				else if(IsKataSama(command,w)){
+					atas(&M, &P,&J);
+					J.minutes = J.minutes - 5;
+					J.total = J.total - 5;
+				}
+				else if(IsKataSama(command,d)){
+					kanan(&M, &P,&J);
+					J.minutes = J.minutes - 5;
+					J.total = J.total - 5;
+				}
+				else if(IsKataSama(command,s)){
+					bawah(&M, &P,&J);
+					J.minutes = J.minutes - 5;
+					J.total = J.total - 5;
+				}
+				else if(IsKataSama(command,interaksi)){
+					interact(M,P,J);
+				}
+				else if(IsKataSama(command,buy)){
+					beli(&P,&J);
+				}
+				else if(IsKataSama(command,skip)){
+					loncat(&J);
+				}
+				else if(IsKataSama(command,build)){
+					bangun(&M,&P,&J);
+				}
 			}
-			else if(IsKataSama(command,w)){
-				atas(&M, &P,&J);
+			
+			//MAIN PHASE
+			else{ //buka jam 8 pagi
+				system("cls");
+				ShowMap(M);
+				printf("\n");
+				ShowJam(J);
+				printf("Main Phase\n");
+				printf("\n");
+				ShowPlayer(P);
+				printf("\n");
+				printf("Yametteee onii-chan, ini mau ngapain??? >_>\n");
+				printf("wasd -> gendong aku onii-chan (Jangan nabrak tembok, buang-buang waktu baka!). Jalan butuh 5 menit onii-chan!\n");
+				printf("interaksi -> untuk berinteraksi dengan lingkungan sekitar, biar ga sama aku terus onii-chan :3\n");
+				printf("quit -> sudah karena ada papa-mama!\n");
+				printf("\n");
+				printf("Ngapain onii-chan, imuoto bakal ngikut ini: ");
+				BacaKata(&command);
+				printf("\n");
+				
+				if(IsKataSama(command,a)){
+					kiri(&M,&P,&J);
+				}
+				else if(IsKataSama(command,w)){
+					atas(&M, &P,&J);
+				}
+				else if(IsKataSama(command,d)){
+					kanan(&M, &P,&J);
+				}
+				else if(IsKataSama(command,s)){
+					bawah(&M, &P,&J);
+				}
+				else if(IsKataSama(command,interaksi)){
+					interact(M,P,J);
+				}
 			}
-			else if(IsKataSama(command,d)){
-				kanan(&M, &P,&J);
-			}
-			else if(IsKataSama(command,s)){
-				bawah(&M, &P,&J);
-			}
-			else if(IsKataSama(command,interaksi)){
-				interact(M,P,J);
-			}
-		}
+		}	
+		printf("Oniii-chan, kurang lama ;-;\n");
 		
 	}
 	else if(IsKataSama(command, quit)){

@@ -15,6 +15,10 @@ void CreatePlayer(PLAYER *P){
 	}
 	(*P).Det.panjangnama = Name.length;
 	
+	(*P).Det.uang = 1000;
+	(*P).Det.besi = 10;
+	(*P).Det.kayu = 100;
+	(*P).Det.batu = 50;
 }
 
 void ShowPlayer(PLAYER P){
@@ -27,4 +31,6 @@ void ShowPlayer(PLAYER P){
 	}
 	printf(" onii-chan ^^");
 	printf("\n");
+	printf("Uang: %d\n", P.Det.uang);
+	printf("Kayu: %d | Batu: %d | Besi: %d\n",P.Det.kayu,P.Det.batu,P.Det.besi);
 }
