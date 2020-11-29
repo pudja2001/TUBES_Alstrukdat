@@ -147,6 +147,28 @@ int main(){
 	build.T[4] = 'd';
 	build.T[5] = '\n';
 	build.length = 5;
+	//Command untuk upgrade
+	KATA upgrade;
+	upgrade.T[0] = 'u';
+	upgrade.T[1] = 'p';
+	upgrade.T[2] = 'g';
+	upgrade.T[3] = 'r';
+	upgrade.T[4] = 'a';
+	upgrade.T[5] = 'd';
+	upgrade.T[6] = 'e';
+	upgrade.T[7] = '\n';
+	upgrade.length = 7;
+	//Command dan keperluan untuk untuk
+	PLAYER P_Temp;
+	JAM J_Temp;
+	MAP M_Temp;
+	KATA undo;
+	undo.T[0] = 'u';
+	undo.T[1] = 'n';
+	undo.T[2] = 'd';
+	undo.T[3] = 'o';
+	undo.T[4] = '\n';
+	undo.length = 4;
 	
 	/********BAGIAN UTAMA GAME NON DEKLARASI************/
 	system("cls");
@@ -192,9 +214,14 @@ int main(){
 		
 			//USER INTERFACE
 			
+			//ADDITIONAL IN DAY XD
+			P_Temp = P;
+			J_Temp = J;
+			M_Temp = M;
+			
 			//PREPARATION PHASE
 			
-			if(J.minutes < 480){
+			while (J.minutes < 480 && !IsKataSama(command,quit)){
 				system("cls");
 				ShowMap(M);
 				printf("\n");
@@ -209,6 +236,8 @@ int main(){
 				
 				printf("buy -> membeli kayu, batu, atau besi xD\n");
 				printf("build -> Membangun wahana baru onii-chan xD\n");
+				printf("upgrade -> Membangun upgrade onii-chan, biar ga sepi-sepian di gelap gelapan xD\n");
+				printf("undo -> mengulang preparation phase onii-chan, biar waktu kita bersama tambah banyak!\n");
 				printf("skip -> langsung aja ke Main Phase onii-chan\n");
 				
 				printf("quit -> sudah karena ada papa-mama!\n");
@@ -248,11 +277,23 @@ int main(){
 				}
 				else if(IsKataSama(command,build)){
 					bangun(&M,&P,&J);
+					BacaKata(&command);
+				}
+				else if (IsKataSama(command, upgrade)){
+					up(&M,&P,&J);
+					BacaKata(&command);
+				}
+				else if (IsKataSama(command, undo)){
+					M = M_Temp;
+					P = P_Temp;
+					J = J_Temp;
 				}
 			}
 			
+			//generate antrian
+			
 			//MAIN PHASE
-			else{ //buka jam 8 pagi
+			while( J.minutes >= 480 && !IsKataSama(command,quit)) { //buka jam 8 pagi
 				system("cls");
 				ShowMap(M);
 				printf("\n");

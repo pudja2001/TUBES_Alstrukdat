@@ -334,9 +334,9 @@ void beli(PLAYER *P, JAM *J){
 	if( (*J).minutes < 450){
 		system("cls");
 		printf("Uang: %d\n", (*P).Det.uang);
-		printf("1 -> Beli kayu. 1 kayu = 10 uang\n");
+		printf("1 -> Beli kayu. 1 kayu = 1 uang\n");
 		printf("2 -> Beli batu. 1 batu = 5 uang\n");
-		printf("3 -> Beli besi. 1 besi = 1 uang\n");
+		printf("3 -> Beli besi. 1 besi = 10 uang\n");
 		printf("Masukkan yang mau dibeli (1/2/3): ");
 		scanf("%c", &opsi);
 		while( (opsi != '1') && (opsi != '2') && (opsi != '3') ){
@@ -344,7 +344,7 @@ void beli(PLAYER *P, JAM *J){
 			printf("Uang: %d\n", (*P).Det.uang);
 			printf("1 -> Beli kayu. 1 kayu = 1 uang\n");
 			printf("2 -> Beli batu. 1 batu = 5 uang\n");
-			printf("3 -> Beli besi. 1 besi = 1 uang\n");
+			printf("3 -> Beli besi. 1 besi = 10 uang\n");
 			printf("MASUKKAN YANG BENER ONII-CHAN\n");
 			printf("Masukkan yang mau dibeli (1/2/3): ");
 			scanf("%c",&opsi);
@@ -594,10 +594,10 @@ void bangun(MAP *M, PLAYER *P, JAM *J){
 					}
 				}
 				else{
-					printf("Kurang bahan onii-chan :( \n");
+					scanf("%c", &bangunan);
 					printf("\n");
+					printf("Kurang bahan onii-chan :( \n");
 					printf("Tekan enter untuk melanjutkan maen xD");
-					BacaKata(&huhuhu);
 				}
 			}
 			else if(bangunan == 'M'){
@@ -674,10 +674,10 @@ void bangun(MAP *M, PLAYER *P, JAM *J){
 					}
 				}
 				else{
-					printf("Kurang bahan onii-chan :( \n");
+					scanf("%c", &bangunan);
 					printf("\n");
+					printf("Kurang bahan onii-chan :( \n");
 					printf("Tekan enter untuk melanjutkan maen xD");
-					BacaKata(&huhuhu);
 				}
 				
 			}
@@ -755,10 +755,10 @@ void bangun(MAP *M, PLAYER *P, JAM *J){
 					}
 				}
 				else{
-					printf("Kurang bahan onii-chan :( \n");
+					scanf("%c", &bangunan);
 					printf("\n");
+					printf("Kurang bahan onii-chan :( \n");
 					printf("Tekan enter untuk melanjutkan maen xD");
-					BacaKata(&huhuhu);
 				}
 			}
 			else if(bangunan == 'S'){
@@ -835,10 +835,10 @@ void bangun(MAP *M, PLAYER *P, JAM *J){
 					}
 				}
 				else{
-					printf("Kurang bahan onii-chan :( \n");
+					scanf("%c", &bangunan);
 					printf("\n");
+					printf("Kurang bahan onii-chan :( \n");
 					printf("Tekan enter untuk melanjutkan maen xD");
-					BacaKata(&huhuhu);
 				}
 			}
 			else if(bangunan == 'L'){
@@ -915,10 +915,10 @@ void bangun(MAP *M, PLAYER *P, JAM *J){
 					}
 				}
 				else{
-					printf("Kurang bahan onii-chan :( \n");
+					scanf("%c", &bangunan);
 					printf("\n");
+					printf("Kurang bahan onii-chan :( \n");
 					printf("Tekan enter untuk melanjutkan maen xD");
-					BacaKata(&huhuhu);
 				}
 			}
 			else if(bangunan == 'H'){
@@ -995,38 +995,696 @@ void bangun(MAP *M, PLAYER *P, JAM *J){
 					}
 				}
 				else{
-					printf("Kurang bahan onii-chan :( \n");
+					scanf("%c", &bangunan);
 					printf("\n");
+					printf("Kurang bahan onii-chan :( \n");
 					printf("Tekan enter untuk melanjutkan maen xD");
-					BacaKata(&huhuhu);
 				}
 			}
 			else{
-				printf("Tidak jadi membangun onii-chan :(((( \n");
+				scanf("%c", &bangunan);
 				printf("\n");
+				printf("Tidak jadi membangun onii-chan :(((( \n");
 				printf("Tekan enter untuk melanjutkan maen xD");
-				BacaKata(&huhuhu);
 			}
 		}
 		else{
-			printf("Tidak ada tempat untuk membangun :( \n");
+			scanf("%c", &bangunan);
 			printf("\n");
+			printf("Tidak ada tempat untuk membangun :( \n");
 			printf("Tekan enter untuk melanjutkan maen xD");
-			BacaKata(&huhuhu);
 		}
 	}
 	else if ( ((*J).minutes >= 180) && ((*J).minutes < 480)){
-		printf("Waktu tidak cukup onii-chan, keburu buka :p\n");
+		scanf("%c", &bangunan);
 		printf("\n");
+		printf("Waktu tidak cukup onii-chan, keburu buka :p\n");
 		printf("Tekan enter untuk melanjutkan maen xD");
-		BacaKata(&huhuhu);
 	}
 	else{
-		printf("Bukan fasenya :p\n");
+		scanf("%c", &bangunan);
 		printf("\n");
+		printf("Bukan fasenya :p\n");
 		printf("Tekan enter untuk melanjutkan maen xD");
-		BacaKata(&huhuhu);
 	}
 }
+
+void up(MAP *M, PLAYER *P, JAM *J){
+	char opsi;
+	KATA huhuhu;
+	
+	int i, j;
+	i = (*P).Pos.x;
+	j = (*P).Pos.y;
+	
+	//CEK WAKTU
+	if ( (*J).minutes < 180 ){
+		//ADA WAKTU UNTUK UPGRADE
+		system("cls");
+		
+		ShowMap(*M);
+		printf("\n");
+		
+		printf("Mode upgrade\n");
+		//MEMILIH BANGUNAN
+		printf("\n");
+		printf("Memilih wahana yang ingin diupgrade\n");
+		printf("Pastikan ada wahana di sekitarmu!\n");
+		printf("\n");
+		printf("Harta Onii-chan\n");
+		printf("Kayu: %d | Batu: %d | Besi: %d\n",(*P).Det.kayu,(*P).Det.batu,(*P).Det.besi);
+		//PILIHAN WAHANA
+		printf("\n");
+		printf("B -> Bioskop Same Day As Japan\n");
+		printf("Kayu: 1000 | Batu: 200 | Besi: 50\n");
+		printf("Durasi: 90 | Harga: 50 | Kapasitas: +1\n");
+			
+		printf("\n");
+		printf("M -> Maid Cafe\n");
+		printf("Kayu: 250 | Batu: 50 | Besi: 75\n");
+		printf("Durasi: 60 | Harga: 25 | Kapasitas: +1\n");
+			
+		printf("\n");
+		printf("C -> Cosplay Spot\n");
+		printf("Kayu: 75 | Batu: 50 | Besi: 35\n");
+		printf("Durasi: 60 | Harga: 10 | Kapasitas: +1\n");
+		
+		printf("\n");
+		printf("S-> Weebs Store\n");
+		printf("Kayu: 25 | Batu: 40 | Besi: 5\n");
+		printf("Durasi: 120 | Harga: 5 | Kapasitas: +1\n");
+		
+		printf("\n");
+		printf("L -> Love Arcade\n");
+		printf("Kayu: 100 | Batu: 5 | Besi: 55\n");
+		printf("Durasi: 30 | Harga: 8 | Kapasitas: +1\n");
+			
+		printf("\n");
+		printf("H -> Host Club\n");
+		printf("Kayu: 50 | Batu: 50 | Besi: 10\n");
+		printf("Durasi: 30 | Harga: 8 | Kapasitas: +1\n");
+		printf("\n");
+		
+		printf("Pilih tempat yang mau diupgrade (wasd) dan pastikan itu bertipe wahana atau upgrade gagal! q untuk batal: ");
+		scanf("%c", &opsi);
+		
+		while (  (opsi != 'w') && (opsi != 'a') && (opsi != 's') && (opsi != 'd') && (opsi != 'q')){
+			system("cls");
+			
+			ShowMap(*M);
+			printf("\n");
+			
+			printf("Mode upgrade\n");
+			//MEMILIH BANGUNAN
+			printf("\n");
+			printf("Memilih wahana yang ingin diupgrade\n");
+			printf("Pastikan ada wahana di sekitarmu!\n");
+			printf("\n");
+			printf("Harta Onii-chan\n");
+			printf("Kayu: %d | Batu: %d | Besi: %d\n",(*P).Det.kayu,(*P).Det.batu,(*P).Det.besi);
+			//PILIHAN WAHANA
+			printf("\n");
+			printf("B -> Bioskop Same Day As Japan\n");
+			printf("Kayu: 1000 | Batu: 200 | Besi: 50\n");
+			printf("Durasi: 90 | Harga: 50 | Kapasitas: +1\n");
+				
+			printf("\n");
+			printf("M -> Maid Cafe\n");
+			printf("Kayu: 250 | Batu: 50 | Besi: 75\n");
+			printf("Durasi: 60 | Harga: 25 | Kapasitas: +1\n");
+				
+			printf("\n");
+			printf("C -> Cosplay Spot\n");
+			printf("Kayu: 75 | Batu: 50 | Besi: 35\n");
+			printf("Durasi: 60 | Harga: 10 | Kapasitas: +1\n");
+		
+			printf("\n");
+			printf("S-> Weebs Store\n");
+			printf("Kayu: 25 | Batu: 40 | Besi: 5\n");
+			printf("Durasi: 120 | Harga: 5 | Kapasitas: +1\n");
+		
+			printf("\n");
+			printf("L -> Love Arcade\n");
+			printf("Kayu: 100 | Batu: 5 | Besi: 55\n");
+			printf("Durasi: 30 | Harga: 8 | Kapasitas: +1\n");
+			
+			printf("\n");
+			printf("H -> Host Club\n");
+			printf("Kayu: 50 | Batu: 50 | Besi: 10\n");
+			printf("Durasi: 30 | Harga: 8 | Kapasitas: +1\n");
+			printf("\n");
+			
+			printf("Pilih tempat yang mau diupgrade (wasd) dan pastikan itu bertipe wahana atau upgrade gagal! q untuk batal: ");
+			scanf("%c", &opsi);
+		}
+		
+		//kalo pilih atas
+		if (opsi == 'w'){
+			//kalo bioskop
+			if( (*M).T[i-1][j].karakter == 'B'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 1000 && (*P).Det.batu >= 200 && (*P).Det.besi >= 50){
+					(*M).T[i - 1][j].D.level = (*M).T[i - 1][j].D.level + 1;
+					(*M).T[i - 1][j].D.harga = (*M).T[i - 1][j].D.level * 50;
+					(*M).T[i - 1][j].D.kapasitas = (*M).T[i - 1][j].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 1000;
+					(*P).Det.batu = (*P).Det.batu - 200;
+					(*P).Det.besi = (*P).Det.besi - 50;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i-1][j].karakter == 'M'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 250 && (*P).Det.batu >= 50 && (*P).Det.besi >= 75){
+					(*M).T[i - 1][j].D.level = (*M).T[i - 1][j].D.level + 1;
+					(*M).T[i - 1][j].D.harga = (*M).T[i - 1][j].D.level * 25;
+					(*M).T[i - 1][j].D.kapasitas = (*M).T[i - 1][j].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 250;
+					(*P).Det.batu = (*P).Det.batu - 50;
+					(*P).Det.besi = (*P).Det.besi - 75;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i-1][j].karakter == 'C'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 75 && (*P).Det.batu >= 50 && (*P).Det.besi >= 35){
+					(*M).T[i - 1][j].D.level = (*M).T[i - 1][j].D.level + 1;
+					(*M).T[i - 1][j].D.harga = (*M).T[i - 1][j].D.level * 10;
+					(*M).T[i - 1][j].D.kapasitas = (*M).T[i - 1][j].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 75;
+					(*P).Det.batu = (*P).Det.batu - 50;
+					(*P).Det.besi = (*P).Det.besi - 35;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i-1][j].karakter == 'S'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 25 && (*P).Det.batu >= 40 && (*P).Det.besi >= 5){
+					(*M).T[i - 1][j].D.level = (*M).T[i - 1][j].D.level + 1;
+					(*M).T[i - 1][j].D.harga = (*M).T[i - 1][j].D.level * 5;
+					(*M).T[i - 1][j].D.kapasitas = (*M).T[i - 1][j].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 25;
+					(*P).Det.batu = (*P).Det.batu - 40;
+					(*P).Det.besi = (*P).Det.besi - 5;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i-1][j].karakter == 'L'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 100 && (*P).Det.batu >= 5 && (*P).Det.besi >= 55){
+					(*M).T[i - 1][j].D.level = (*M).T[i - 1][j].D.level + 1;
+					(*M).T[i - 1][j].D.harga = (*M).T[i - 1][j].D.level * 8;
+					(*M).T[i - 1][j].D.kapasitas = (*M).T[i - 1][j].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 100;
+					(*P).Det.batu = (*P).Det.batu - 5;
+					(*P).Det.besi = (*P).Det.besi - 55;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i-1][j].karakter == 'H'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 50 && (*P).Det.batu >= 50 && (*P).Det.besi >= 10){
+					(*M).T[i - 1][j].D.level = (*M).T[i - 1][j].D.level + 1;
+					(*M).T[i - 1][j].D.harga = (*M).T[i - 1][j].D.level * 8;
+					(*M).T[i - 1][j].D.kapasitas = (*M).T[i - 1][j].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 50;
+					(*P).Det.batu = (*P).Det.batu - 50;
+					(*P).Det.besi = (*P).Det.besi - 10;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else{
+				//do nothing
+			}
+		}
+		else if (opsi == 'a'){
+			//kalo bioskop
+			if( (*M).T[i][j - 1].karakter == 'B'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 1000 && (*P).Det.batu >= 200 && (*P).Det.besi >= 50){
+					(*M).T[i][j - 1].D.level = (*M).T[i][j - 1].D.level + 1;
+					(*M).T[i][j - 1].D.harga = (*M).T[i][j - 1].D.level * 50;
+					(*M).T[i][j - 1].D.kapasitas = (*M).T[i][j - 1].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 1000;
+					(*P).Det.batu = (*P).Det.batu - 200;
+					(*P).Det.besi = (*P).Det.besi - 50;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i][j - 1].karakter == 'M'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 250 && (*P).Det.batu >= 50 && (*P).Det.besi >= 75){
+					(*M).T[i][j - 1].D.level = (*M).T[i - 1][j].D.level + 1;
+					(*M).T[i][j - 1].D.harga = (*M).T[i][j - 1].D.level * 25;
+					(*M).T[i][j - 1].D.kapasitas = (*M).T[i][j - 1].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 250;
+					(*P).Det.batu = (*P).Det.batu - 50;
+					(*P).Det.besi = (*P).Det.besi - 75;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i][j - 1].karakter == 'C'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 75 && (*P).Det.batu >= 50 && (*P).Det.besi >= 35){
+					(*M).T[i][j - 1].D.level = (*M).T[i][j - 1].D.level + 1;
+					(*M).T[i][j - 1].D.harga = (*M).T[i][j - 1].D.level * 10;
+					(*M).T[i][j - 1].D.kapasitas = (*M).T[i][j - 1].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 75;
+					(*P).Det.batu = (*P).Det.batu - 50;
+					(*P).Det.besi = (*P).Det.besi - 35;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i][j - 1].karakter == 'S'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 25 && (*P).Det.batu >= 40 && (*P).Det.besi >= 5){
+					(*M).T[i][j - 1].D.level = (*M).T[i][j - 1].D.level + 1;
+					(*M).T[i][j - 1].D.harga = (*M).T[i][j - 1].D.level * 5;
+					(*M).T[i][j - 1].D.kapasitas = (*M).T[i][j - 1].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 25;
+					(*P).Det.batu = (*P).Det.batu - 40;
+					(*P).Det.besi = (*P).Det.besi - 5;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i][j - 1].karakter == 'L'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 100 && (*P).Det.batu >= 5 && (*P).Det.besi >= 55){
+					(*M).T[i][j - 1].D.level = (*M).T[i][j - 1].D.level + 1;
+					(*M).T[i][j - 1].D.harga = (*M).T[i][j - 1].D.level * 8;
+					(*M).T[i][j - 1].D.kapasitas = (*M).T[i][j - 1].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 100;
+					(*P).Det.batu = (*P).Det.batu - 5;
+					(*P).Det.besi = (*P).Det.besi - 55;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i][j - 1].karakter == 'H'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 50 && (*P).Det.batu >= 50 && (*P).Det.besi >= 10){
+					(*M).T[i][j - 1].D.level = (*M).T[i][j - 1].D.level + 1;
+					(*M).T[i][j - 1].D.harga = (*M).T[i][j - 1].D.level * 8;
+					(*M).T[i][j - 1].D.kapasitas = (*M).T[i][j - 1].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 50;
+					(*P).Det.batu = (*P).Det.batu - 50;
+					(*P).Det.besi = (*P).Det.besi - 10;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else{
+				//do nothing
+			}
+		}
+		if (opsi == 's'){
+			//kalo bioskop
+			if( (*M).T[i+1][j].karakter == 'B'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 1000 && (*P).Det.batu >= 200 && (*P).Det.besi >= 50){
+					(*M).T[i + 1][j].D.level = (*M).T[i + 1][j].D.level + 1;
+					(*M).T[i + 1][j].D.harga = (*M).T[i + 1][j].D.level * 50;
+					(*M).T[i + 1][j].D.kapasitas = (*M).T[i + 1][j].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 1000;
+					(*P).Det.batu = (*P).Det.batu - 200;
+					(*P).Det.besi = (*P).Det.besi - 50;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i+1][j].karakter == 'M'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 250 && (*P).Det.batu >= 50 && (*P).Det.besi >= 75){
+					(*M).T[i + 1][j].D.level = (*M).T[i + 1][j].D.level + 1;
+					(*M).T[i + 1][j].D.harga = (*M).T[i + 1][j].D.level * 25;
+					(*M).T[i + 1][j].D.kapasitas = (*M).T[i + 1][j].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 250;
+					(*P).Det.batu = (*P).Det.batu - 50;
+					(*P).Det.besi = (*P).Det.besi - 75;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i+1][j].karakter == 'C'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 75 && (*P).Det.batu >= 50 && (*P).Det.besi >= 35){
+					(*M).T[i + 1][j].D.level = (*M).T[i + 1][j].D.level + 1;
+					(*M).T[i + 1][j].D.harga = (*M).T[i + 1][j].D.level * 10;
+					(*M).T[i + 1][j].D.kapasitas = (*M).T[i + 1][j].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 75;
+					(*P).Det.batu = (*P).Det.batu - 50;
+					(*P).Det.besi = (*P).Det.besi - 35;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i+1][j].karakter == 'S'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 25 && (*P).Det.batu >= 40 && (*P).Det.besi >= 5){
+					(*M).T[i + 1][j].D.level = (*M).T[i + 1][j].D.level + 1;
+					(*M).T[i + 1][j].D.harga = (*M).T[i + 1][j].D.level * 5;
+					(*M).T[i + 1][j].D.kapasitas = (*M).T[i + 1][j].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 25;
+					(*P).Det.batu = (*P).Det.batu - 40;
+					(*P).Det.besi = (*P).Det.besi - 5;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i+1][j].karakter == 'L'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 100 && (*P).Det.batu >= 5 && (*P).Det.besi >= 55){
+					(*M).T[i + 1][j].D.level = (*M).T[i + 1][j].D.level + 1;
+					(*M).T[i + 1][j].D.harga = (*M).T[i + 1][j].D.level * 8;
+					(*M).T[i + 1][j].D.kapasitas = (*M).T[i + 1][j].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 100;
+					(*P).Det.batu = (*P).Det.batu - 5;
+					(*P).Det.besi = (*P).Det.besi - 55;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i+1][j].karakter == 'H'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 50 && (*P).Det.batu >= 50 && (*P).Det.besi >= 10){
+					(*M).T[i + 1][j].D.level = (*M).T[i + 1][j].D.level + 1;
+					(*M).T[i + 1][j].D.harga = (*M).T[i + 1][j].D.level * 8;
+					(*M).T[i + 1][j].D.kapasitas = (*M).T[i + 1][j].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 50;
+					(*P).Det.batu = (*P).Det.batu - 50;
+					(*P).Det.besi = (*P).Det.besi - 10;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else{
+				//do nothing
+			}
+		}
+		else if (opsi == 'd'){
+			//kalo bioskop
+			if( (*M).T[i][j + 1].karakter == 'B'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 1000 && (*P).Det.batu >= 200 && (*P).Det.besi >= 50){
+					(*M).T[i][j + 1].D.level = (*M).T[i][j + 1].D.level + 1;
+					(*M).T[i][j + 1].D.harga = (*M).T[i][j + 1].D.level * 50;
+					(*M).T[i][j + 1].D.kapasitas = (*M).T[i][j + 1].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 1000;
+					(*P).Det.batu = (*P).Det.batu - 200;
+					(*P).Det.besi = (*P).Det.besi - 50;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i][j + 1].karakter == 'M'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 250 && (*P).Det.batu >= 50 && (*P).Det.besi >= 75){
+					(*M).T[i][j + 1].D.level = (*M).T[i + 1][j].D.level + 1;
+					(*M).T[i][j + 1].D.harga = (*M).T[i][j + 1].D.level * 25;
+					(*M).T[i][j + 1].D.kapasitas = (*M).T[i][j + 1].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 250;
+					(*P).Det.batu = (*P).Det.batu - 50;
+					(*P).Det.besi = (*P).Det.besi - 75;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i][j + 1].karakter == 'C'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 75 && (*P).Det.batu >= 50 && (*P).Det.besi >= 35){
+					(*M).T[i][j + 1].D.level = (*M).T[i][j + 1].D.level + 1;
+					(*M).T[i][j + 1].D.harga = (*M).T[i][j + 1].D.level * 10;
+					(*M).T[i][j + 1].D.kapasitas = (*M).T[i][j + 1].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 75;
+					(*P).Det.batu = (*P).Det.batu - 50;
+					(*P).Det.besi = (*P).Det.besi - 35;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i][j + 1].karakter == 'S'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 25 && (*P).Det.batu >= 40 && (*P).Det.besi >= 5){
+					(*M).T[i][j + 1].D.level = (*M).T[i][j + 1].D.level + 1;
+					(*M).T[i][j + 1].D.harga = (*M).T[i][j + 1].D.level * 5;
+					(*M).T[i][j + 1].D.kapasitas = (*M).T[i][j + 1].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 25;
+					(*P).Det.batu = (*P).Det.batu - 40;
+					(*P).Det.besi = (*P).Det.besi - 5;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i][j + 1].karakter == 'L'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 100 && (*P).Det.batu >= 5 && (*P).Det.besi >= 55){
+					(*M).T[i][j + 1].D.level = (*M).T[i][j + 1].D.level + 1;
+					(*M).T[i][j + 1].D.harga = (*M).T[i][j + 1].D.level * 8;
+					(*M).T[i][j + 1].D.kapasitas = (*M).T[i][j + 1].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 100;
+					(*P).Det.batu = (*P).Det.batu - 5;
+					(*P).Det.besi = (*P).Det.besi - 55;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else if ( (*M).T[i][j + 1].karakter == 'H'){
+				//kalo mampu membangun
+				if( (*P).Det.kayu >= 50 && (*P).Det.batu >= 50 && (*P).Det.besi >= 10){
+					(*M).T[i][j + 1].D.level = (*M).T[i][j + 1].D.level + 1;
+					(*M).T[i][j + 1].D.harga = (*M).T[i][j + 1].D.level * 8;
+					(*M).T[i][j + 1].D.kapasitas = (*M).T[i][j + 1].D.level;
+					
+					(*P).Det.kayu = (*P).Det.kayu - 50;
+					(*P).Det.batu = (*P).Det.batu - 50;
+					(*P).Det.besi = (*P).Det.besi - 10;
+					
+					(*J).minutes = (*J).minutes + 300;
+					(*J).total = (*J).total + 300;
+				}
+				else{
+					scanf("%c", &opsi);
+					printf("\n");
+					printf("Tidak material upgrade onii-chan, keburu buka :p\n");
+					printf("Tekan enter untuk melanjutkan maen xD");
+				}
+			}
+			else{
+				//do nothing
+			}
+		}
+		else{
+			//do nothing
+		}
+	}
+	
+	else if ( (*J).minutes >= 180 && (*J).minutes < 480){
+		scanf("%c", &opsi);
+		printf("\n");
+		printf("Tidak adaa waktu upgrade onii-chan, keburu buka :p\n");
+		printf("Tekan enter untuk melanjutkan maen xD");
+	}
+	else{
+		scanf("%c", &opsi);
+		printf("\n");
+		printf("Bukan fasenya :p\n");
+		printf("Tekan enter untuk melanjutkan maen xD");
+	}
+}
+
 
 //FUNGSI YANG BERLAKU DI MAIN PHASE ONLY
