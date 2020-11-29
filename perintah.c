@@ -2,6 +2,7 @@
 #include "player.h"
 #include "jam.h"
 #include <windows.h>
+#include <time.h>
 
 
 //FUNGSI YANG BERLAKU DI SEMUA PHASE
@@ -1688,3 +1689,457 @@ void up(MAP *M, PLAYER *P, JAM *J){
 
 
 //FUNGSI YANG BERLAKU DI MAIN PHASE ONLY
+void skiptime( JAM *J){
+	char opsi;
+	system("cls");
+	ShowJam(*J);
+	printf("\n");
+	printf("\n");
+	printf("0 -> batal\n");
+	printf("1 -> skip 15 menit\n");
+	printf("2 -> skip 30 menit\n");
+	printf("3 -> skip 1 jam\n");
+	printf("4 -> skip 2 jam\n");
+	printf("\n");
+	printf("Pilihan onii-chan: ");
+	scanf("%c", &opsi);
+	while ( (opsi != '0') && (opsi != '1') && (opsi != '2') && (opsi != '3') && (opsi != '4') ){
+		system("cls");
+		ShowJam(*J);
+		printf("\n");
+		printf("\n");
+		printf("0 -> batal\n");
+		printf("1 -> skip 15 menit\n");
+		printf("2 -> skip 30 menit\n");
+		printf("3 -> skip 1 jam\n");
+		printf("4 -> skip 2 jam\n");
+		printf("\n");
+		printf("Pilihan onii-chan: (Ieeee, masukin yang bener pilihannya onii-chan)");
+		scanf("%c", &opsi);
+	}
+	if ( opsi == '1'){
+		(*J).minutes = (*J).minutes + 15;
+		(*J).total = (*J).total + 15;
+	}
+	else if ( opsi == '2'){
+		(*J).minutes = (*J).minutes + 30;
+		(*J).total = (*J).total + 30;
+	}
+	else if ( opsi == '3'){
+		(*J).minutes = (*J).minutes + 60;
+		(*J).total = (*J).total + 60;
+	}
+	else if ( opsi == '4'){
+		(*J).minutes = (*J).minutes + 120;
+		(*J).total = (*J).total + 120;
+	}
+	else{
+		//do nothing
+	}
+	
+}
+
+
+void judi(PLAYER *P, JAM *J){
+	char opsi;
+	
+	int tangan;
+	int tangan_lawan;
+	int x;
+	
+	int kayu;
+	int batu;
+	int besi;
+	
+	int bet;
+	
+	srand(time(NULL));
+	
+	system("cls");
+	printf("KAKEGURUI INTERFACE\n");
+	printf("\n");
+	printf("Uangmu: %d",(*P).Det.uang);
+	printf("\n");
+	printf("0 -> KABUR!\n");
+	printf("1 -> Bermain 'batu gunting kertas' biasa (minimum bet: 10; maximum bet: 25)\n");
+	printf("2 -> Bermain 'batu gunting kertas' melawan Yumeko Jabami (minimum bet: 100; maximum bet: 200)\n");
+	printf("3 -> Gacha 50 uang hadiah uang\n");
+	printf("4 -> Gacha 200 uang hadiah material\n");
+	printf("\n");
+	printf("Berani yang mana: ");
+	scanf("%c", &opsi);
+	while ( (opsi != '0') && (opsi != '1') && (opsi != '2') && (opsi != '3') && (opsi != '4') ){
+		system("cls");
+		printf("KAKEGURUI INTERFACE\n");
+		printf("\n");
+		printf("Uangmu: %d",(*P).Det.uang);
+		printf("\n");
+		printf("0 -> KABUR!\n");
+		printf("1 -> Bermain 'batu gunting kertas' biasa (minimum bet: 10; maximum bet: 25)\n");
+		printf("2 -> Bermain 'batu gunting kertas' melawan Yumeko Jabami (minimum bet: 100; maximum bet: 200)\n");
+		printf("3 -> Gacha 50 uang hadiah uang\n");
+		printf("\n");
+		printf("Berani yang mana: ");
+		scanf("%c", &opsi);
+	}
+	
+	//Lawan orang normal
+	if (opsi == '1'){
+		//punya cukup duit kita maen
+		if( (*P).Det.uang >= 10){
+			system("cls");
+			printf("KAKEGURUI INTERFACE\n");
+			printf("Batu gunting kertas biasa\n");
+			printf("\n");
+			printf("Uangmu: %d",(*P).Det.uang);
+			printf("\n");
+			printf("Masukkan taruhanmu (10-25): ");
+			scanf("%d", &bet);
+			while(bet < 10 || bet > 25){
+				system("cls");
+				printf("KAKEGURUI INTERFACE\n");
+				printf("Batu gunting kertas biasa\n");
+				printf("\n");
+				printf("Uangmu: %d",(*P).Det.uang);
+				printf("\n");
+				printf("Masukkan taruhanmu (10-25): ");
+				scanf("%d", &bet);
+			}
+			printf("\n");
+			printf("Masukkan tanganmu!\n");
+			printf(" 0 -> 1 | 1 -> 2 | 2 -> 0\n");
+			printf("Masukkan 0, 1, atau 2! Salah memasukkan, uang mengalir ke lawan!\n");
+			printf("Tanganmu: ");
+			scanf("%d", &tangan);
+			tangan = tangan%3; //antisipasi
+			tangan_lawan = rand()%3;
+			printf("Tangan lawan: %d\n", tangan_lawan);
+			printf("\n");
+			if( tangan == 0){
+				if(tangan_lawan == 0){
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Seri?!\n");
+					printf("Tekan enter untuk pulang!\n");
+				}
+				else if(tangan_lawan == 1){
+					(*P).Det.uang = (*P).Det.uang + bet;
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Menang woiii!\n");
+					printf("Tekan enter untuk pulang!\n");
+				}
+				else{
+					(*P).Det.uang = (*P).Det.uang - bet;
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("MASIH BERANI LAGI GAK?\n");
+					printf("Tekan enter untuk pulang!\n");
+				}
+			}
+			else if(tangan == 1){
+				if(tangan_lawan == 1){
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Seri?!\n");
+					printf("Tekan enter untuk pulang!\n");
+				}
+				else if(tangan_lawan == 2){
+					(*P).Det.uang = (*P).Det.uang + bet;
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Menang woiii!\n");
+					printf("Tekan enter untuk pulang!\n");
+				}
+				else{
+					(*P).Det.uang = (*P).Det.uang - bet;
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("MASIH BERANI LAGI GAK?\n");
+					printf("Tekan enter untuk pulang!\n");
+				}
+			}
+			else{
+				if(tangan_lawan == 2){
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Seri?!\n");
+					printf("Tekan enter untuk pulang!\n");
+				}
+				else if(tangan_lawan == 0){
+					(*P).Det.uang = (*P).Det.uang + bet;
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Menang woiii!\n");
+					printf("Tekan enter untuk pulang!\n");
+				}
+				else{
+					(*P).Det.uang = (*P).Det.uang - bet;
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("MASIH BERANI LAGI GAK?\n");
+					printf("Tekan enter untuk pulang!\n");
+				}
+			}
+		}
+		//kurang duit
+		else{
+			scanf("%c", &opsi);
+			printf("Miskin ga usah sok maen ke kasino!\n");
+			printf("Tekan enter untuk pulang!\n");
+		}
+	}
+	//Lawan YUMEKO JABAMI
+	if (opsi == '2'){
+		//punya cukup duit kita maen
+		if( (*P).Det.uang >= 100){
+			system("cls");
+			printf("KAKEGURUI INTERFACE\n");
+			printf("Batu gunting kertas melawan YUMEKO JABAMI\n");
+			printf("\n");
+			printf("Uangmu: %d",(*P).Det.uang);
+			printf("\n");
+			printf("Jadi, kali ini kita bertaruh berapa (100-200): ");
+			scanf("%d", &bet);
+			while(bet < 100 || bet > 200){
+				system("cls");
+				printf("KAKEGURUI INTERFACE\n");
+				printf("Batu gunting kertas biasa\n");
+				printf("\n");
+				printf("Uangmu: %d",(*P).Det.uang);
+				printf("\n");
+				printf("Jadi, kali ini kita bertaruh berapa (100-200): ");
+				scanf("%d", &bet);
+			}
+			printf("\n");
+			printf("Masukkan tangan andalanmu!\n");
+			printf(" 0 -> 1 | 1 -> 2 | 2 -> 0\n");
+			printf("Masukkan 0, 1, atau 2! Salah memasukkan, peluang dipanggil POCHI jadi besar~\n");
+			printf("Tanganmu: ");
+			scanf("%d", &tangan);
+			tangan = tangan%3; //antisipasi
+			if( tangan == 0){
+				
+				x = rand()%100;
+				//Yumeko menang saat tangan_lawan = 2
+				if( x < 90){
+					tangan_lawan = 2;
+				}
+				else if( x >= 90 && x < 95){
+					tangan_lawan = 0;
+				}
+				else if( x >= 95 && x <100){
+					tangan_lawan = 1;
+				}
+				printf("Tangan YUMEKO: %d", tangan_lawan);
+				printf("\n");
+				
+				
+				
+				if(tangan_lawan == 0){
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Ara, seri?!\n");
+					printf("Tekan enter untuk poker face!\n");
+				}
+				else if(tangan_lawan == 1){
+					(*P).Det.uang = (*P).Det.uang + bet;
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Omedetto!\n");
+					printf("Tekan enter untuk ara-ara!\n");
+				}
+				else{
+					(*P).Det.uang = (*P).Det.uang - bet;
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Sanggupkah kamu membayar kekalahanmu, onii-san?\n");
+					printf("Tekan enter untuk menangis dan lari!\n");
+				}
+			}
+			else if(tangan == 1){
+				
+				
+				x = rand()%100;
+				//Yumeko menang saat tangan_lawan = 0
+				if( x < 90){
+					tangan_lawan = 0;
+				}
+				else if( x >= 90 && x < 95){
+					tangan_lawan = 1;
+				}
+				else if( x >= 95 && x <100){
+					tangan_lawan = 2;
+				}
+				printf("Tangan YUMEKO: %d", tangan_lawan);
+				printf("\n");
+				
+				
+				if(tangan_lawan == 1){
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Ara, seri?!\n");
+					printf("Tekan enter untuk poker face!\n");
+				}
+				else if(tangan_lawan == 2){
+					(*P).Det.uang = (*P).Det.uang + bet;
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Omedetto!\n");
+					printf("Tekan enter untuk ara-ara!\n");
+				}
+				else{
+					(*P).Det.uang = (*P).Det.uang - bet;
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Sanggupkah kamu membayar kekalahanmu, onii-san?\n");
+					printf("Tekan enter untuk menangis dan lari!\n");
+				}
+			}
+			else{
+				
+				x = rand()%100;
+				//Yumeko menang saat tangan_lawan = 1
+				if( x < 90){
+					tangan_lawan = 1;
+				}
+				else if( x >= 90 && x < 95){
+					tangan_lawan = 2;
+				}
+				else if( x >= 95 && x <100){
+					tangan_lawan = 0;
+				}
+				printf("Tangan YUMEKO: %d", tangan_lawan);
+				printf("\n");
+				
+				
+				if(tangan_lawan == 2){
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Ara, seri?!\n");
+					printf("Tekan enter untuk poker face!\n");
+				}
+				else if(tangan_lawan == 0){
+					(*P).Det.uang = (*P).Det.uang + bet;
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Omedetto!\n");
+					printf("Tekan enter untuk ara-ara!\n");
+				}
+				else{
+					(*P).Det.uang = (*P).Det.uang - bet;
+					(*J).minutes = (*J).minutes + 30;
+					(*J).total = (*J).total + 30;
+					scanf("%c", &opsi);
+					printf("Sanggupkah kamu membayar kekalahanmu, onii-san?\n");
+					printf("Tekan enter untuk menangis dan lari!\n");
+				}
+			}
+		}
+		//kurang duit
+		else{
+			scanf("%c", &opsi);
+			printf("Ara, ternyata uangmu ngga cukup buat melawanku ya?\n");
+			printf("Tekan enter untuk KABUR!\n");
+		}
+	}
+	if (opsi == '3'){
+		//jika uang cukup langsung GACHA
+		if( (*P).Det.uang >= 50){
+			
+			(*P).Det.uang = (*P).Det.uang - 50;
+			
+			x = rand()%100;
+			
+			if( x < 40){
+				(*P).Det.uang = (*P).Det.uang + 10;
+				scanf("%c", &opsi);
+				printf("Uangmu berkurang 40\n");
+				printf("Tekan enter untuk pulang!\n");
+			}
+			else if(x >= 40 && x < 80){
+				(*P).Det.uang = (*P).Det.uang + 25;
+				scanf("%c", &opsi);
+				printf("Uangmu berkurang 25\n");
+				printf("Tekan enter untuk pulang!\n");
+			}
+			else if(x >= 80 && x < 94){
+				(*P).Det.uang = (*P).Det.uang + 50;
+				scanf("%c", &opsi);
+				printf("Uangmu TETAP\n");
+				printf("Tekan enter untuk pulang!\n");
+			}
+			else if( x >= 94 && x < 97){
+				(*P).Det.uang = (*P).Det.uang + 75;
+				scanf("%c", &opsi);
+				printf("Uangmu BERTAMBAH 25, SELAMAT\n");
+				printf("Tekan enter untuk pulang!\n");
+			}
+			else if( x >= 97 && x <99){
+				(*P).Det.uang = (*P).Det.uang + 100;
+				scanf("%c", &opsi);
+				printf("Uangmu BERTAMBAH 50, SELAMAT\n");
+				printf("Tekan enter untuk pulang!\n");
+			}
+			else if( x == 99){
+				(*P).Det.uang = (*P).Det.uang + 200;
+				scanf("%c", &opsi);
+				printf("JACKPOT UANGMU BERTAMBAH 150\n");
+				printf("Tekan enter untuk pulang!\n");
+			}
+			(*J).minutes = (*J).minutes + 30;
+			(*J).total = (*J).total + 30;
+		}
+		else{
+			scanf("%c", &opsi);
+			printf("Uangmu tidak cukupi untuk GACHA ini\n");
+			printf("Tekan enter untuk pulang!\n");
+		}
+	}
+	if (opsi == '4'){
+		if( (*P).Det.uang >= 200){
+			
+			(*P).Det.uang = (*P).Det.uang - 200;
+			
+			kayu = rand()%100 + 1;
+			batu = rand()%20 + 1;
+			besi = rand()%10 + 1;
+			
+			(*P).Det.kayu = (*P).Det.kayu + kayu;
+			(*P).Det.batu = (*P).Det.batu + batu;
+			(*P).Det.besi = (*P).Det.besi + besi;
+			
+			(*J).minutes = (*J).minutes + 30;
+			(*J).total = (*J).total + 30;
+			
+			scanf("%c", &opsi);
+			printf("Kayumu bertambah: %d\n", kayu);
+			printf("Batumu bertambah: %d\n", batu);
+			printf("Besimu bertambah: %d\n", besi);
+			printf("Tekan enter untuk pulang!\n");
+		}
+		else{
+			scanf("%c", &opsi);
+			printf("Uangmu tidak cukup untuk GACHA ini\n");
+			printf("Tekan enter untuk pulang!\n");
+		}
+	}
+	
+}

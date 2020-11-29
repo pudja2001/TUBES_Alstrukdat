@@ -4,7 +4,7 @@
 #include "boolean.h"
 /**************KUMPULAN ADT******************/
 typedef struct {
-	char T[10];
+	char T[100];
 	int length;
 } KATA;
 

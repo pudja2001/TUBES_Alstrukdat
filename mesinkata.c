@@ -6,7 +6,7 @@ void BacaKata(KATA *X){
 	
 	i = 0;
 	(*X).length = 0;
-	while ( (i < 10) && (KATA(*X,i-1) != '\n' )){ //Memasukkan Command ke variabel KATA atau nulis apapund deh
+	while ( (i < 100) && (KATA(*X,i-1) != '\n' )){ //Memasukkan Command ke variabel KATA atau nulis apapund deh
 		scanf("%c", &KATA(*X, i) );
 		(*X).length = (*X).length + 1;
 		i = i + 1;

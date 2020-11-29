@@ -20,6 +20,7 @@ int main(){
 	/*************DEKLARASI JAM*******************/
 	JAM J;
 	J.minutes = 0;
+	J.total = 0;
 	
 	/*************DEKLARASI MAP PETAAAAAA*********/
 	char temp; //untuk pindah pindah
@@ -158,7 +159,7 @@ int main(){
 	upgrade.T[6] = 'e';
 	upgrade.T[7] = '\n';
 	upgrade.length = 7;
-	//Command dan keperluan untuk untuk
+	//Command dan keperluan untuk undo
 	PLAYER P_Temp;
 	JAM J_Temp;
 	MAP M_Temp;
@@ -169,6 +170,32 @@ int main(){
 	undo.T[3] = 'o';
 	undo.T[4] = '\n';
 	undo.length = 4;
+	
+	//Main phase
+	
+	//Command mempercepat waktu agar tidak kelamaan menunggu wahana kosong
+	KATA fast;
+	fast.T[0] = 'f';
+	fast.T[1] = 'a';
+	fast.T[2] = 's';
+	fast.T[3] = 't';
+	fast.T[4] = '\n';
+	fast.length = 4;
+	
+	//Command untuk judi
+	KATA kakegurui;
+	kakegurui.T[0] = 'k';
+	kakegurui.T[1] = 'a';
+	kakegurui.T[2] = 'k';
+	kakegurui.T[3] = 'e';
+	kakegurui.T[4] = 'g';
+	kakegurui.T[5] = 'u';
+	kakegurui.T[6] = 'r';
+	kakegurui.T[7] = 'u';
+	kakegurui.T[8] = 'i';
+	kakegurui.T[9] = '\n';
+	kakegurui.length = 9;
+	
 	
 	/********BAGIAN UTAMA GAME NON DEKLARASI************/
 	system("cls");
@@ -221,12 +248,12 @@ int main(){
 			
 			//PREPARATION PHASE
 			
-			while (J.minutes < 480 && !IsKataSama(command,quit)){
+			while ( J.minutes < 480 && !IsKataSama(command,quit)){
 				system("cls");
 				ShowMap(M);
 				printf("\n");
 				ShowJam(J);
-				printf("Preparation Phase\n");
+				printf("Preparation Phase (sampai 07.59)\n");
 				printf("\n");
 				ShowPlayer(P);
 				printf("\n");
@@ -293,18 +320,20 @@ int main(){
 			//generate antrian
 			
 			//MAIN PHASE
-			while( J.minutes >= 480 && !IsKataSama(command,quit)) { //buka jam 8 pagi
+			while( J.minutes >= 480 && !IsKataSama(command,quit)) { //buka jam 8 pagi sampai jam 12 malam
 				system("cls");
 				ShowMap(M);
 				printf("\n");
 				ShowJam(J);
-				printf("Main Phase\n");
+				printf("Main Phase (sampai 23.59)\n");
 				printf("\n");
 				ShowPlayer(P);
 				printf("\n");
 				printf("Yametteee onii-chan, ini mau ngapain??? >_>\n");
 				printf("wasd -> gendong aku onii-chan (Jangan nabrak tembok, buang-buang waktu baka!). Jalan butuh 5 menit onii-chan!\n");
 				printf("interaksi -> untuk berinteraksi dengan lingkungan sekitar, biar ga sama aku terus onii-chan :3\n");
+				printf("fast -> mempercepat waktu onii-chan, kasian ada yang nunggu lama wahananya ga kosong-kosong\n");
+				printf("kakegurui -> Fitur tambahan!\n");
 				printf("quit -> sudah karena ada papa-mama!\n");
 				printf("\n");
 				printf("Ngapain onii-chan, imuoto bakal ngikut ini: ");
@@ -325,6 +354,13 @@ int main(){
 				}
 				else if(IsKataSama(command,interaksi)){
 					interact(M,P,J);
+				}
+				else if(IsKataSama(command, fast)){
+					skiptime(&J);
+				}
+				else if(IsKataSama(command, kakegurui)){
+					judi(&P,&J);
+					BacaKata(&command);
 				}
 			}
 		}	
